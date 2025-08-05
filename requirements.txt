@@ -1,0 +1,26 @@
+# Core dependencies
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# Whisper and audio processing (already installed in conda env)
+# openai-whisper==20250625  # Already installed
+# torch>=2.6.0  # Already installed
+torchaudio
+ffmpeg-python==0.2.0
+
+# File handling and utilities
+aiofiles==23.2.0
+python-dotenv==1.0.0
+
+# Background tasks and async
+celery==5.3.4
+redis==5.0.1
+
+# Development and testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+black==23.11.0
+flake8==6.1.0
