@@ -64,7 +64,7 @@ class WhisperService:
                 "text": result["text"],
                 "language": result.get("language"),
                 "segments": result.get("segments", []),
-                "model_used": model_name.value
+                "whisper_model": model_name.value
             }
             
         except Exception as e:

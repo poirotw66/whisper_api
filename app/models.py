@@ -35,7 +35,9 @@ class TranscriptionResponse(BaseModel):
     language: Optional[str] = None
     segments: Optional[List[dict]] = None
     processing_time: float
-    model_used: str
+    whisper_model: str
+    
+    model_config = {"protected_namespaces": ()}
 
 
 class TaskStatus(str, Enum):

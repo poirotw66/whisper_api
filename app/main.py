@@ -146,7 +146,7 @@ async def transcribe_audio(
             language=result.get("language"),
             segments=result.get("segments"),
             processing_time=processing_time,
-            model_used=result["model_used"]
+            whisper_model=result["whisper_model"]
         )
         
         return response
@@ -292,7 +292,7 @@ async def process_transcription_task(
             language=result.get("language"),
             segments=result.get("segments"),
             processing_time=processing_time,
-            model_used=result["model_used"]
+            whisper_model=result["whisper_model"]
         )
         
         # Update task with result

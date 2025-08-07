@@ -66,4 +66,3 @@ htmlcov/
 # Local environment
 .env.local
 .env.production
-models/

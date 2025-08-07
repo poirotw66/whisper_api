@@ -1,4 +1,4 @@
-from pydantic import BaseSettings
+from pydantic_settings import BaseSettings
 import os
 
 
@@ -19,6 +19,10 @@ class Settings(BaseSettings):
     
     # Redis Configuration (for background tasks)
     redis_url: str = "redis://localhost:6379/0"
+    
+    # Performance Configuration
+    workers: int = 1
+    max_workers: int = 2
     
     class Config:
         env_file = ".env"
