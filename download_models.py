@@ -69,7 +69,7 @@ def download_model(model_name):
 
 def download_recommended_models():
     """下載推薦的模型組合"""
-    recommended = ["tiny", "base", "small", "turbo"]
+    recommended = ["tiny", "base", "small", "turbo", "large"]
     print("🎯 下載推薦的模型組合...")
     
     success_count = 0

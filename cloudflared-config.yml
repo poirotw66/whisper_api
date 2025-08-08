@@ -1,0 +1,10 @@
+tunnel: 21d3433a-9ddd-4f48-b73d-b4c3dc19a080
+credentials-file: /root/.cloudflared/21d3433a-9ddd-4f48-b73d-b4c3dc19a080.json
+protocol: http2
+
+ingress:
+  - hostname: whisper.itr-lab.cloud
+    service: http://172.30.129.169:8000
+    originRequest:
+      httpHostHeader: whisper.itr-lab.cloud
+  - service: http_status:404

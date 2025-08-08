@@ -12,6 +12,57 @@
 - 📊 **任務狀態追蹤**: 異步任務進度查詢
 - 🐳 **Docker 支援**: 容器化部署
 
+## Docker 部署
+
+### 快速部署
+
+使用一鍵部署腳本：
+
+```bash
+./deploy.sh
+```
+
+### 手動部署
+
+1. **下載模型**
+   ```bash
+   ./download_models.sh recommended
+   ```
+
+2. **構建和啟動服務**
+   ```bash
+   docker-compose up -d
+   ```
+
+3. **檢查服務狀態**
+   ```bash
+   docker-compose ps
+   ```
+
+### 環境配置
+
+- **開發環境**: 使用 `docker-compose.yml` + `docker-compose.override.yml`
+- **生產環境**: 使用 `docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d`
+
+### 服務管理
+
+使用管理腳本：
+
+```bash
+./manage.sh start    # 啟動服務
+./manage.sh stop     # 停止服務
+./manage.sh status   # 查看狀態
+./manage.sh logs     # 查看日誌
+./manage.sh test     # 測試API
+./manage.sh monitor  # 監控資源
+```
+
+### 服務地址
+
+- API 文檔: http://localhost/docs
+- 健康檢查: http://localhost/health
+- 直接API: http://localhost:8000 (開發環境)
+
 ## 快速開始
 
 ### 環境要求
@@ -70,6 +121,12 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
 - `GET /health` - 健康檢查
 
 ## 使用示例
+
+curl -f http://localhost:8000/health
+
+curl -X POST "http://localhost:8000/transcribe" -H "Content-Type: multipart/form-data" -F "file=@test_audio.wav" -F "model=base"
+
+curl http://localhost:8000/models 
 
 ### 同步轉錄
 

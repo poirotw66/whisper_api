@@ -5,9 +5,9 @@ python-multipart==0.0.6
 pydantic==2.5.0
 pydantic-settings==2.1.0
 
-# Whisper and audio processing (already installed in conda env)
-# openai-whisper==20250625  # Already installed
-# torch>=2.6.0  # Already installed
+# Whisper and audio processing
+openai-whisper
+torch>=2.0.0
 torchaudio
 ffmpeg-python==0.2.0
 
