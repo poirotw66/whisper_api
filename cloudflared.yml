@@ -1,0 +1,7 @@
+tunnel: 21d3433a-9ddd-4f48-b73d-b4c3dc19a080
+credentials-file: /etc/cloudflared/cert.json
+
+ingress:
+  - hostname: whisper.itr-lab.cloud
+    service: http://nginx:80
+  - service: http_status:404

@@ -19,7 +19,7 @@ class WhisperService:
             print(f"Loading Whisper model: {model_key}")
             try:
                 # Set model cache directory
-                cache_dir = os.getenv("MODEL_CACHE_DIR", "./models")
+                cache_dir = os.getenv("CACHE_DIR", "./models")
                 os.makedirs(cache_dir, exist_ok=True)
                 
                 model = whisper.load_model(

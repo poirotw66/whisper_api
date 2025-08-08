@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     
     # Whisper Configuration
     whisper_model: str = "turbo"
-    model_cache_dir: str = "./models"
+    cache_dir: str = "./models"  # 改名避免 model_ 前綴衝突
     
     # File Upload Configuration
     max_file_size: str = "100MB"
@@ -27,6 +27,7 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
+        protected_namespaces = ('settings_',)  # 設置保護命名空間
 
 
 def get_settings() -> Settings:

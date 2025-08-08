@@ -48,7 +48,7 @@ async def startup_event():
     """Initialize directories on startup."""
     os.makedirs(settings.upload_dir, exist_ok=True)
     os.makedirs(settings.temp_dir, exist_ok=True)
-    os.makedirs(settings.model_cache_dir, exist_ok=True)
+    os.makedirs(settings.cache_dir, exist_ok=True)
     print("Whisper API service started successfully!")
 
 
