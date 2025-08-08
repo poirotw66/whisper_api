@@ -93,12 +93,38 @@ curl http://localhost:8000/health
 # 使用本地配置
 ./start_api.sh start --local
 
-# 使用 Cloudflare Tunnel
+# 使用 Cloudflare Tunnel (需要先配置 .env.cloudflare)
+cp .env.cloudflare.example .env.cloudflare
+# 編輯 .env.cloudflare 填入你的 Cloudflare Tunnel token
 ./start_api.sh start --cloud
 
 # 重新構建特定版本
 ./start_api.sh build --cloud
 ```
+
+## 🔑 Cloudflare Tunnel 配置
+
+### 第一次設置
+1. 複製示例配置文件：
+   ```bash
+   cp .env.cloudflare.example .env.cloudflare
+   ```
+
+2. 編輯 `.env.cloudflare` 文件，填入你的實際值：
+   ```env
+   CLOUDFLARE_TUNNEL_TOKEN=你的實際token
+   TUNNEL_DOMAIN=你的域名
+   ```
+
+3. 啟動服務：
+   ```bash
+   ./start_api.sh start --cloud
+   ```
+
+### 🔒 安全注意事項
+- ⚠️ **永遠不要將 `.env.cloudflare` 文件提交到 git**
+- 🔐 **Token 具有完整的 tunnel 訪問權限，請妥善保管**
+- 🔄 **如果 token 洩露，請立即在 Cloudflare Dashboard 中撤銷並重新生成**
 
 ## 📚 API 使用指南
 

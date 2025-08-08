@@ -52,13 +52,15 @@ services:
 
   cloudflared:
     image: cloudflare/cloudflared:latest
-    command: tunnel --no-autoupdate run --url http://nginx:80 --token eyJhIjoiYzRiMjVjMTc3M2Y3MGI2ZWE1NDBlYTc5ODQxY2MwMjgiLCJzIjoiaHhZdi80Z2czaExTMmJiQXdjaHBDQ2tET3hkbXoxR0w0N1NJbHFhMUlRZz0iLCJ0IjoiMjFkMzQzM2EtOWRkZC00ZjQ4LWI3M2QtYjRjM2RjMTlhMDgwIn0=
+    command: tunnel --no-autoupdate run --url http://nginx:80 --token ${CLOUDFLARE_TUNNEL_TOKEN}
     restart: unless-stopped
     networks:
       - whisper-network
     depends_on:
       - nginx
       - whisper-api
+    env_file:
+      - .env.cloudflare
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/ready"]
       interval: 30s

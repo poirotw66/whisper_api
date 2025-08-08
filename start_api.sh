@@ -82,6 +82,22 @@ EOF
         log_info "已創建 .env.production 文件"
     fi
     
+    # 如果使用 Cloudflare 配置，檢查相關環境文件
+    if [[ "$COMPOSE_FILE" == *"cloudflare"* ]]; then
+        if [ ! -f ".env.cloudflare" ]; then
+            log_error ".env.cloudflare 文件不存在！"
+            log_error "請複製 .env.cloudflare.example 為 .env.cloudflare 並填入你的 Cloudflare Tunnel token"
+            log_error "cp .env.cloudflare.example .env.cloudflare"
+            exit 1
+        fi
+        
+        # 檢查是否包含示例值
+        if grep -q "your_tunnel_token_here" .env.cloudflare; then
+            log_error ".env.cloudflare 包含示例值，請填入實際的 Cloudflare Tunnel token"
+            exit 1
+        fi
+    fi
+    
     log_success "環境配置檢查完成"
 }
 
