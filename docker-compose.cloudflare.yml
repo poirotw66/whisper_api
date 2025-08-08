@@ -33,6 +33,8 @@ services:
             - driver: nvidia
               count: 1
               capabilities: [gpu]
+    env_file:
+      - .env.production
 
   redis:
     image: redis:7-alpine

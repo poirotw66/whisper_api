@@ -127,6 +127,17 @@ show_help() {
     echo "  $0 logs             # 顯示日誌"
 }
 
+# 載入環境變數
+load_env_vars() {
+    if [[ "$COMPOSE_FILE" == *"cloudflare"* ]]; then
+        if [ -f ".env.cloudflare" ]; then
+            set -a  # 自動導出變數
+            source .env.cloudflare
+            set +a  # 停止自動導出
+        fi
+    fi
+}
+
 # 選擇 Docker Compose 文件
 select_compose_file() {
     if [[ "$*" == *"--cloud"* ]]; then
@@ -151,6 +162,7 @@ select_compose_file() {
 start_services() {
     log_info "啟動 Whisper API 服務..."
     
+    load_env_vars
     docker compose -f "$COMPOSE_FILE" up -d
     
     log_success "服務啟動完成！"
@@ -166,6 +178,8 @@ start_services() {
 # 停止服務
 stop_services() {
     log_info "停止 Whisper API 服務..."
+    
+    load_env_vars
     docker compose -f "$COMPOSE_FILE" down
     log_success "服務已停止"
 }
@@ -173,6 +187,7 @@ stop_services() {
 # 重啟服務
 restart_services() {
     log_info "重啟 Whisper API 服務..."
+    load_env_vars
     docker compose -f "$COMPOSE_FILE" restart
     log_success "服務重啟完成"
 }
@@ -180,6 +195,8 @@ restart_services() {
 # 重新構建服務
 build_services() {
     log_info "重新構建 Whisper API 服務..."
+    
+    load_env_vars
     docker compose -f "$COMPOSE_FILE" up -d --build
     log_success "服務構建並啟動完成"
 }
@@ -187,6 +204,7 @@ build_services() {
 # 清理並重啟
 clean_restart() {
     log_info "清理並重新啟動服務..."
+    load_env_vars
     docker compose -f "$COMPOSE_FILE" down -v
     docker system prune -f
     docker compose -f "$COMPOSE_FILE" up -d --build
@@ -204,6 +222,7 @@ show_logs() {
         fi
     done
     
+    load_env_vars
     if [ -z "$service" ]; then
         docker compose -f "$COMPOSE_FILE" logs -f
     else
@@ -215,6 +234,7 @@ show_logs() {
 check_services_health() {
     log_info "檢查服務狀態..."
     
+    load_env_vars
     # 檢查容器狀態
     docker compose -f "$COMPOSE_FILE" ps
     
